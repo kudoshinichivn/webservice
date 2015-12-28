@@ -61,7 +61,7 @@ class EmployeeController extends BaseController{
 					{
 						if($section=="employee")
 						{
-							if(Employee::checkEmployee($detail_data->eid)=="[]")
+							if(Employee::checkEmployee($detail_data->eid)=="")
 							{
 								Employee::appendEmployee($detail_data);
 								$arr=array(
@@ -87,7 +87,7 @@ class EmployeeController extends BaseController{
 					{
 						if($section=="employee")
 						{
-							if(Employee::checkEmployee($detail_data->eid)!="[]")
+							if(Employee::checkEmployee($detail_data->eid)!="")
 							{
 								Employee::updateEmployee($detail_data);
 								$arr=array(

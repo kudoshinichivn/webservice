@@ -5,28 +5,30 @@ class Employee extends Eloquent{
 
 	protected $table = 'employees';
 	public $timestamps = false;
+	protected $primaryKey = 'eid';
+	protected $fillable=array(
+					'eid',
+					'ename',
+					'ebirth',
+					'egender',
+					'etel',
+					'eemail',
+					'eaddress',
+					'dcode',
+					'rcode',
+				);
 
 	public static function checkEmployee($key)
 	{
 		
-		$data=Employee::where('eid','=',$key)
-						->get();
+		$data=Employee::find($key);
 		return $data;
 	} 
-	public static function getEmployee($key)
-	{
-		
-		$data=Employee::where('eid','=',$key)
-						->orwhere('ename','like','%'.$key.'%')
-						->orwhere('eemail','like','%'.$key.'%')
-						->get();
-		return $data;
-	} 
-
+	
 	public static function appendEmployee($data)
 	{
 		
-		Employee::insert(array(
+		Employee::create(array(
 					'eid'=>$data->eid,
 					'ename'=>$data->ename,
 					'ebirth'=>$data->ebirth,
@@ -42,13 +44,13 @@ class Employee extends Eloquent{
 	public static function removeEmployee($data)
 	{
 		
-		Employee::where('eid', '=', $data)->delete();
+		Employee::destroy($data);
 		
 	}  
 	public static function updateEmployee($data)
 	{
 		
-		Employee::where('eid', '=', $data->eid)->update(array(
+		Employee::find($data->eid)->update(array(
 					'ename'=>$data->ename,
 					'ebirth'=>$data->ebirth,
 					'egender'=>$data->egender,
@@ -59,6 +61,16 @@ class Employee extends Eloquent{
 					'rcode'=>$data->rcode,
 				));
 		
-	}  
+	}
+	public static function getEmployee($key)
+	{
+		
+		$data=Employee::where('eid','=',$key)
+						->orwhere('ename','like','%'.$key.'%')
+						->orwhere('eemail','like','%'.$key.'%')
+						->get();
+		return $data;
+	} 
+  
 
 }

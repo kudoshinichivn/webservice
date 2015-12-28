@@ -14,30 +14,3 @@
 Route::get('/','EmployeeController@index');
 Route::post('/','EmployeeController@index');
 
-Route::get('/test',function()
-{
-	
-$login=array(
-		'username'=>'admin',
-		'password'=>'123456',
-	);
-
-$condition=array(
-	'field'=>'eid',
-	'compare'=>'=',
-	'value'=>'1'
-	);
-$data=array();
-
-
-$arr=array(
-	'login'=>$login,
-	'method'=>'get',
-	'section'=>'employee',
-	'filter'=>'true',
-	'condition'=>$condition,
-	'data'=>$data
-	);
-	$json_data=json_encode($arr);
-	echo $json_data;
-});
